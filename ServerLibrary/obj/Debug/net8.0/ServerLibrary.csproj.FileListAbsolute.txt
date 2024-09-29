@@ -1,0 +1,17 @@
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\ServerLibrary.deps.json
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\ServerLibrary.dll
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\ServerLibrary.pdb
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.AssemblyInfoInputs.cache
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.AssemblyInfo.cs
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.dll
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\refint\ServerLibrary.dll
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.pdb
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ref\ServerLibrary.dll
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\ServerLibrary.runtimeconfig.json
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\BaseLibrary.dll
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\bin\Debug\net8.0\BaseLibrary.pdb
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.csproj.AssemblyReference.cache
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLi.AF94C59E.Up2Date
+C:\Users\Samadhan\source\repos\EMS_soluction\ServerLibrary\obj\Debug\net8.0\ServerLibrary.genruntimeconfig.cache
