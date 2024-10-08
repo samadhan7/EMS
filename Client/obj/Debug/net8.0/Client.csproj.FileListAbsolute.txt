@@ -1052,3 +1052,4 @@ C:\Users\Samadhan\source\repos\EMS_soluction\Client\bin\Debug\net8.0\wwwroot\_fr
 C:\Users\Samadhan\source\repos\EMS_soluction\Client\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Samadhan\source\repos\EMS_soluction\Client\obj\Debug\net8.0\webcil\AutoMapper.wasm
 C:\Users\Samadhan\source\repos\EMS_soluction\Client\obj\Debug\net8.0\compressed\7sw9g21xbf.gz
+C:\Users\Samadhan\source\repos\EMS_soluction\Client\obj\Debug\net8.0\Client.sourcelink.json
