@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "Server.Controllers.AuthenticationController",
+    "Method": "login",
+    "RelativePath": "api/Authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "BaseLibrary.DTOs.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.AuthenticationController",
     "Method": "CreateAsync",
     "RelativePath": "api/Authentication/register",
     "HttpMethod": "POST",

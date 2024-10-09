@@ -4,9 +4,14 @@ using BaseLibrary.Responses;
 using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using ServerLibrary.Data;
 using ServerLibrary.Helpers;
 using ServerLibrary.Repositories.Contracts;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using Constants = ServerLibrary.Helpers.Constants;
 
 namespace ServerLibrary.Repositories.Implementations
@@ -37,13 +42,14 @@ namespace ServerLibrary.Repositories.Implementations
 			
 			}
 
-			var checkUserRole = await appDbContext.SystemRoles.FirstOrDefaultAsync(x => x.Name!.Equals(Constants.User));
+			var checkUserRole = await appDbContext.SystemRoles.FirstOrDefaultAsync(_ => _.Name!.Equals(Constants.User));
+
 			SystemRole response = new();
-			if (checkAdminRole is null)
+
+			if (checkUserRole is null)
 			{
-				var createAdminRole = await AddToDatabase(new SystemRole { Name = Constants.User });
+				response = await AddToDatabase(new SystemRole { Name = Constants.User });
 				await AddToDatabase(new UserRole() { RoleId = response.Id, UserId = applicationUser.Id });
-				return new GeneralResponse(true, "Account Created!.");
 
 			}
 			else
@@ -53,9 +59,51 @@ namespace ServerLibrary.Repositories.Implementations
 			return new GeneralResponse(true, "Account Created!.");
 		}
 
-		public Task<LoginResponse> SignInAsync(Login user)
+		public async Task<LoginResponse> SignInAsync(Login user)
 		{
-			throw new NotImplementedException();
+			if (user is null) return new LoginResponse(false, "Model is empty");
+
+			var applicationUser = await FindUserByEmail(user.Email!);
+
+			if (applicationUser is null) return new LoginResponse(false, "User not found.");
+
+			if (!BCrypt.Net.BCrypt.Verify(user.Password, applicationUser.Password))
+				return new LoginResponse(false, "Email or password is invalid.");
+
+			var getUserRole = await appDbContext.UserRoles.FirstOrDefaultAsync(_ => _.UserId == applicationUser.Id);
+			if (getUserRole is null) return new LoginResponse(false, "User role not found.");
+
+			var getRoleName = await appDbContext.SystemRoles.FirstOrDefaultAsync(_ => _.Id == getUserRole.RoleId);
+			if (getRoleName is null) return new LoginResponse(false, "User role name not found.");
+
+			string jwtToken = GenerateToken(applicationUser, getRoleName!.Name!);
+			string refreshToken = GenerateRefreshToken();
+			return new LoginResponse(true, "login successfully.", jwtToken, refreshToken);
+		}
+
+		public static string GenerateRefreshToken() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+
+		private string GenerateToken(ApplicationUser user, string role) {
+
+			var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Value.Key!));
+			var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+			var userClamis = new[] {
+				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+				new Claim(ClaimTypes.Name,user.Fullname!),
+				new Claim(ClaimTypes.Email,user.Email!),
+				new Claim(ClaimTypes.Role, role!)
+			};
+
+			var token = new JwtSecurityToken(
+				issuer: config.Value.Issuer,
+				audience: config.Value.Audience,
+				claims: userClamis,
+				expires: DateTime.Now.AddDays(1),
+				signingCredentials: credentials
+				);
+
+			return new JwtSecurityTokenHandler().WriteToken(token);
 		}
 
 		private async Task<ApplicationUser> FindUserByEmail(string email) => 
