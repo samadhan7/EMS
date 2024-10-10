@@ -151,6 +151,25 @@ namespace ServerLibrary.Data.Migrations
                     b.ToTable("GeneralDepartments");
                 });
 
+            modelBuilder.Entity("BaseLibrary.Entities.RefreshTokenInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("refreshTokenInfos");
+                });
+
             modelBuilder.Entity("BaseLibrary.Entities.SystemRole", b =>
                 {
                     b.Property<int>("Id")
